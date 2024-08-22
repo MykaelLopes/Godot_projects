@@ -3,7 +3,8 @@ Script created and tested on Godot 3.5
 
 ---_FIRST STEPS_---------------------------------------------------------------
 
-°In a "KinematicBody2D" node add an "RayCast2D" to detect obstacles.
+°Create a "KinematicBody2D" node.
+°Add an "RayCast2D" to detect obstacles (certify it's enabled).
 °Add a "CollisionShape2D".
 °Add your "Sprite".
 °Copy and paste the "SCRIPT" bellow and change the var "tile_size" value for an INT number.
