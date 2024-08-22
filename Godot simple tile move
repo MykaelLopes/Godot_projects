@@ -1,0 +1,48 @@
+---_GODOT VERSION 3.5_--------------------------------------------------------
+Script created and tested on Godot 3.5
+
+---_FIRST STEPS_---------------------------------------------------------------
+
+°In a "KinematicBody2D" node add an "RayCast2D" to detect obstacles.
+°Add a "CollisionShape2D".
+°Add your "Sprite".
+°Copy and paste the "SCRIPT" bellow and change the var "tile_size" value for an INT number.
+°Run your project.
+ °If it works the player will move like a chess piece and you will collide with walls.
+ °To see if collision and raycast is working use "print(ray.cast_to)" and "print(ray.is_colliding)",
+if you are facing th wall and the second print is showing true it is working.
+
+---_SCRIPT_--------------------------------------------------------------------
+
+#VARIABLES
+#change the tile size for a number
+var tile_size = "tile size"
+var up = Vector2.UP
+var down = Vector2.DOWN
+var left = Vector2.LEFT
+var right = Vector2.RIGHT
+var dir = Vector2.ZERO
+onready var ray = $RayCast2D
+
+func _ready():
+	position.snapped(Vector2.ZERO*tile_size/2)
+
+#MOVEMENT CONTROLS
+func move():
+	dir = Vector2.ZERO
+	if Input.is_action_just_pressed("ui_down"):
+		dir = down
+	if Input.is_action_just_pressed("ui_up"):
+		dir = up
+	if Input.is_action_just_pressed("ui_left"):
+		dir = left
+	if Input.is_action_just_pressed("ui_right"):
+		dir = right
+
+#FUNCTION TO CHANGE RAY CAST POSITION
+func _input(event):
+	move()
+	ray.cast_to = dir*tile_size
+	ray.force_raycast_update()
+	if !ray.is_colliding():
+		position += dir*tile_size
